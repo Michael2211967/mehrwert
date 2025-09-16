@@ -1,16 +1,16 @@
 /* Mehrwert.c							  *
 
- * Mehrwert setzt die neue und alte Mehrwertsteuer ins Verh�ltnis */
+ * Mehrwert setzt die neue und alte Mehrwertsteuer ins Verhältnis */
  
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-float Summe1,Prozent,Netto1,Netto2,Netto3,Netto4;
+float summe,prozent,netto,netto_7,netto_19,netto_16;
 
 int main(long argc,char **argv)
 {
-  char Waehrung[5]="Euro";
+  char waehrung[5]="Euro";
   char *endptr;
   if(argc<2)
   {
@@ -20,33 +20,33 @@ int main(long argc,char **argv)
   else if(argc == 3)
    {
       if (strtof(argv[2], &endptr) && *endptr == '\0')
-         Prozent = atof(argv[2]);
+         prozent = atof(argv[2]);
       else
       {
-         strcpy(Waehrung, argv[2]);
-         Prozent = 19.0;
+         strcpy(waehrung, argv[2]);
+         prozent = 15.0;
       }
    }
   else if(argc == 4)
   {
-   strcpy(Waehrung, argv[2]);
-   Prozent = atof(argv[3]);
+   strcpy(waehrung, argv[2]);
+   prozent = atof(argv[3]);
   }
   else
-   Prozent = 19.0;
-  sscanf(argv[1],"%f",&Summe1);
-  Netto1=100 * Summe1 / 116;
-  Netto2=100 * Summe1 / 115;
-  Netto3=100 * Summe1 / 107;
-  Netto4=100 * Summe1 / (100 + Prozent);
+   prozent = 15.0;
+  sscanf(argv[1], "%f", &summe);
+  netto_7 = 100 * summe / 107;
+  netto_19 = 100 * summe / 119;
+  netto_16 = 100 * summe / 116;
+  netto =100 * summe / (100 + prozent);
   printf("\n\t\t%6.2f %%\t%6.2f %%\t%6.2f %%\t%6.2f %%\n",
-     7.0, 16.0, 15.0, Prozent);
+     7.0, 19.0, 16.0, prozent);
   printf("----------------------------------------------------------------------------\n");
   printf("Netto\t\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n",
-     Netto3, Waehrung, Netto1, Waehrung, Netto2, Waehrung, Netto4, Waehrung);
+     netto_7, waehrung, netto_19, waehrung, netto_16, waehrung, netto, waehrung);
   printf("Mehrwertsteuer\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n",
-     Netto3*7/100, Waehrung, Netto1*16/100, Waehrung, Netto2*15/100, Waehrung, Netto4 * Prozent / 100, Waehrung);
+     netto_7 * 7/100, waehrung, netto_19 * 19/100, waehrung, netto_16 * 16 / 100, waehrung, netto * prozent / 100, waehrung);
   printf("Brutto\t\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n\n",
-     Summe1, Waehrung, Summe1, Waehrung, Summe1, Waehrung, Summe1, Waehrung);
+     summe, waehrung, summe, waehrung, summe, waehrung, summe, waehrung);
   return(0);
 }
