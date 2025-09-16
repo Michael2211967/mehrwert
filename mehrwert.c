@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-float summe,prozent,netto,netto_7,netto_19,netto_16;
+float summe,prozent,netto,netto_7,netto_19,mehrwert;
 
 int main(long argc,char **argv)
 {
@@ -24,7 +24,7 @@ int main(long argc,char **argv)
       else
       {
          strcpy(waehrung, argv[2]);
-         prozent = 15.0;
+         prozent = 16.0;
       }
    }
   else if(argc == 4)
@@ -33,20 +33,21 @@ int main(long argc,char **argv)
    prozent = atof(argv[3]);
   }
   else
-   prozent = 15.0;
+   prozent = 16.0;
   sscanf(argv[1], "%f", &summe);
   netto_7 = 100 * summe / 107;
   netto_19 = 100 * summe / 119;
-  netto_16 = 100 * summe / 116;
-  netto =100 * summe / (100 + prozent);
+  mehrwert = summe * prozent / 100;
+  netto = 100 * summe / (100 + prozent);
+
   printf("\n\t\t%6.2f %%\t%6.2f %%\t%6.2f %%\t%6.2f %%\n",
-     7.0, 19.0, 16.0, prozent);
+     7.0, 19.0, prozent, prozent);
   printf("----------------------------------------------------------------------------\n");
   printf("Netto\t\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n",
-     netto_7, waehrung, netto_19, waehrung, netto_16, waehrung, netto, waehrung);
+     netto_7, waehrung, netto_19, waehrung, summe, waehrung, netto, waehrung);
   printf("Mehrwertsteuer\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n",
-     netto_7 * 7/100, waehrung, netto_19 * 19/100, waehrung, netto_16 * 16 / 100, waehrung, netto * prozent / 100, waehrung);
+     netto_7 * 7/100, waehrung, netto_19 * 19/100, waehrung, mehrwert, waehrung, netto * prozent / 100, waehrung);
   printf("Brutto\t\t%8.2f %s\t%8.2f %s\t%8.2f %s\t%8.2f %s\n\n",
-     summe, waehrung, summe, waehrung, summe, waehrung, summe, waehrung);
+     summe, waehrung, summe, waehrung, summe + mehrwert, waehrung, summe, waehrung);
   return(0);
 }
