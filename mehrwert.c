@@ -6,11 +6,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-float summe,prozent,netto,netto_7,netto_19,mehrwert;
-
 int main(long argc,char **argv)
 {
-  char waehrung[5]="Euro";
+  float summe,prozent,netto,netto_7,netto_19,mehrwert;
+  char waehrung[10]="Euro";
   char *endptr;
   if(argc<2)
   {
@@ -19,17 +18,19 @@ int main(long argc,char **argv)
   }
   else if(argc == 3)
    {
-      if (strtof(argv[2], &endptr) && *endptr == '\0')
+      if (atof(argv[2]))
          prozent = atof(argv[2]);
       else
       {
-         strcpy(waehrung, argv[2]);
+         strncpy(waehrung, argv[2], 9);
+		   waehrung[9] = '\0';
          prozent = 16.0;
       }
    }
   else if(argc == 4)
   {
-   strcpy(waehrung, argv[2]);
+   strncpy(waehrung, argv[2], 9);
+   waehrung[9] = '\0';
    prozent = atof(argv[3]);
   }
   else
